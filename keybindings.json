@@ -7,6 +7,15 @@
           {
             "before": ["K"],
             "after": ["1", "5", "k"]
-          }
+          },
+        {
+            "before": ["H"],
+            "commands": ["workbench.action.focusLeftGroup"]
+        },
+        {
+            "before": ["L"],
+            "commands": ["workbench.action.focusRightGroup"]
+        }
+
         ]
 }
