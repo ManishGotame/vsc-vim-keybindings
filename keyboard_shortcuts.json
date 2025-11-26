@@ -1,0 +1,31 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "cmd+m",
+    "command": "splitMUIImports.split",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+cmd+s",
+    "command": "-splitMUIImports.split",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "alt+cmd+v",
+    "command": "toggleVim"
+  },
+  {
+    "key": "cmd+alt+right",
+    "command": "workbench.action.increaseViewSize",
+    "when": "editorFocus"
+  },
+  {
+    "key": "cmd+alt+left",
+    "command": "workbench.action.decreaseViewSize",
+    "when": "editorFocus"
+  }
+]
