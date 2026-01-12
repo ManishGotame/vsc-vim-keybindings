@@ -27,5 +27,14 @@
     "key": "cmd+alt+left",
     "command": "workbench.action.decreaseViewSize",
     "when": "editorFocus"
+  },
+  {
+    "key": "shift+f12",
+    "command": "editor.action.peekDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus"
+  },
+  {
+    "key": "shift+f12",
+    "command": "-editor.action.revealDefinition"
   }
 ]
