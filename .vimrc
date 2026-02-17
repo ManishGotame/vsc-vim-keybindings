@@ -7,4 +7,5 @@ set number
 set hlsearch
 set ruler
 highlight Comment ctermfg=green
-
+nnoremap J 15j
+nnoremap K 15k
