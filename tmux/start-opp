@@ -1,0 +1,39 @@
+#!/bin/bash
+
+SESSION="opp"
+
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+    exec tmux attach -t "$SESSION"
+fi
+
+# Window 0 - OPP Frontend
+tmux new-session -d -s "$SESSION" -n "opp-frontend"
+tmux send-keys -t "$SESSION:0" \
+'cd ~/workspace/opp/frontend && npm run dev' C-m
+
+# Window 1 - OPP Backend
+tmux new-window -t "$SESSION:" -n "opp-backend"
+tmux send-keys -t "$SESSION:1.0" \
+'cd ~/workspace/opp/backend && source .venv/bin/activate && python manage.py runserver' C-m
+
+tmux split-window -v -t "$SESSION:1"
+tmux send-keys -t "$SESSION:1.1" \
+'cd ~/workspace/opp/backend && source .venv/bin/activate && celery -A backend worker --loglevel=info' C-m
+
+# Window 2 - Admin Frontend
+tmux new-window -t "$SESSION:" -n "opp-admin"
+tmux send-keys -t "$SESSION:2" \
+'cd ~/workspace/opp/opp-admin-frontend && npm run dev' C-m
+
+# Window 3 - Paperscrape
+tmux new-window -t "$SESSION:" -n "paperscrape"
+tmux send-keys -t "$SESSION:3.0" \
+'cd ~/workspace/opp/paperscrape-backend && source .venv/bin/activate && python manage.py runserver' C-m
+
+tmux split-window -v -t "$SESSION:3"
+tmux send-keys -t "$SESSION:3.1" \
+'cd ~/workspace/opp/paperscrape-backend && source .venv/bin/activate && celery -A backend worker -l info -Q default,crawl,parse,classify,publish --pool=solo' C-m
+
+tmux select-window -t "$SESSION:0"
+
+exec tmux attach -t "$SESSION"
